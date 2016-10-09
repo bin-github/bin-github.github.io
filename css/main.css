@@ -1477,11 +1477,6 @@ pre .javascript .function {
   max-width: 120px;
   height: auto;
   border: 1px solid #eee;
-  
-  width:120px; 
-  height:120px; 
-  border-radius:50%; 
-  overflow:hidden;
 }
 .site-author-name {
   margin: 0;
