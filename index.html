@@ -259,150 +259,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/17/spark-单机环境搭建/" itemprop="url">
-                  spark 单机环境搭建
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-17T14:05:14+08:00" content="2016-10-17">
-              2016-10-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>spark单机版wordcount实例运行过程<br>搭建linux下spark环境<br>java环境<br>下载java7或者更高的版本<br>在linux下解压<br>配置环境变量：JAVA_HOME  和  PATH 两个变量<br>测试是否成功：java -version 是否是和你安装的版本相同<br>scala环境<br>下载2.11.x之后的版本<br>接下来的步骤和安装java的相同<br>最后使用scala -version测试是否安装成功<br>hadoop环境<br>此处可参考这篇博文<a href="http://blog.csdn.net/zwx19921215/article/details/41819941" target="_blank" rel="external">http://blog.csdn.net/zwx19921215/article/details/41819941</a><br>spark环境<br>下载spark2.0.1稳定版本<br>在linux下解压，并配置环境变量 SPARK_HOME 和 PATH<br>使用spark_shell命令看能否正常启动，能则安装成功<br>编写程序并打包<br>搭建开发环境：<br>使用idea+maven创建一个简单的java module即可<br>编写程序，这里使用最简单的wordCount例子<br>import org.apache.spark.api.java.JavaPairRDD;<br>import org.apache.spark.api.java.JavaRDD;<br>import org.apache.spark.api.java.function.FlatMapFunction;<br>import org.apache.spark.api.java.function.Function2;<br>import org.apache.spark.api.java.function.PairFunction;<br>import org.apache.spark.sql.SparkSession;<br>import scala.Tuple2;<br>import java.util.Arrays;<br>import java.util.Iterator;<br>import java.util.List;<br>import java.util.regex.Pattern;<br>public final class JavaWordCount {<br>    private static final Pattern SPACE = Pattern.compile(“ “);<br>    public static void main(String[] args) throws Exception {<br>        if (args.length != 2) {<br>            System.err.println(“参数输入有误，一个是输入地址，一个是输出地址”);<br>            System.exit(1);<br>        }<br>        SparkSession spark = SparkSession<br>                .builder()<br>                .appName(“JavaWordCount”)<br>                .getOrCreate();</p>
-<pre><code>    JavaRDD&lt;String&gt; lines = spark.read().textFile(args[0]).javaRDD();
-    JavaRDD&lt;String&gt; words = lines.flatMap(new FlatMapFunction&lt;String, String&gt;() {
-        @Override
-        public Iterator&lt;String&gt; call(String s) {
-            return Arrays.asList(SPACE.split(s)).iterator();
-        }
-    });
-    JavaPairRDD&lt;String, Integer&gt; ones = words.mapToPair(
-            new PairFunction&lt;String, String, Integer&gt;() {
-                @Override
-                public Tuple2&lt;String, Integer&gt; call(String s) {
-                    return new Tuple2&lt;&gt;(s, 1);
-                }
-            });
-    JavaPairRDD&lt;String, Integer&gt; counts = ones.reduceByKey(
-            new Function2&lt;Integer, Integer, Integer&gt;() {
-                @Override
-                public Integer call(Integer i1, Integer i2) {
-                    return i1 + i2;
-                }
-            });
-    counts.saveAsTextFile(args[1]);
-    List&lt;Tuple2&lt;String, Integer&gt;&gt; output = counts.collect();
-    for (Tuple2&lt;?,?&gt; tuple : output) {
-        System.out.println(tuple._1() + &quot;: &quot; + tuple._2());
-    }
-    spark.stop();
-}
-</code></pre><p>}</p>
-<p>打包，如下图：<br>如下<br>找到你要打包的module，并指定那个是主类<br>如果打过包的有可能会包这个错，直接删掉改文件即可，打包完成之后也要删掉这个目录和下面的这个.mf文件，不然运行时会报错。<br>配置打包输出路径<br>选中module，并make<br>在对应的输出路径中找到jar包即可<br>在spark中运行<br>将打包好的jar copy到linux下的某个路径下，可在spark目录下新建一个专门存放应用的文件夹<br>启动spark：<br>切换到spark目录下，使用sbin/start-all.sh命令启动spark，如果无误，则显示如下<br>使用命令跑打包好的程序jar：上面的例子中稍微修改了下自带的程序，所以最后两个参数是必须的，一个是hdfs上的输入路径，一个是输出路径，这些路径可以换成普通的文件路径</p>
-<h1 id="bin-spark-submit-–class-test-JavaWordCount-–master-local-apps-spark-jar-hdfs-192-168-11-133-9000-data-wordCount-wordcount-txt-hdfs-192-168-11-133-9000-output-count"><a href="#bin-spark-submit-–class-test-JavaWordCount-–master-local-apps-spark-jar-hdfs-192-168-11-133-9000-data-wordCount-wordcount-txt-hdfs-192-168-11-133-9000-output-count" class="headerlink" title="bin/spark-submit –class test.JavaWordCount –master local ./apps/spark.jar hdfs://192.168.11.133:9000/data/wordCount/wordcount.txt hdfs://192.168.11.133:9000/output/count/"></a>bin/spark-submit –class test.JavaWordCount –master local ./apps/spark.jar hdfs://192.168.11.133:9000/data/wordCount/wordcount.txt hdfs://192.168.11.133:9000/output/count/</h1><p>命令详解：<br>spark-submit: spark的命令<br>–class ：主类的文件路径，包名+类名<br>–master：主机的地址 + 打包文件的路径，这里使用本机local[2],中括号里的是主机的核数，可选；后面是jar包的存放路径<br>程序的启动参数配置，第一个是输入路径，第二个是输出路径，这个不同的工程有不同的参数设置。<br>参数设置具体可看官网：<a href="http://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="external">http://spark.apache.org/docs/latest/submitting-applications.html</a><br>如果报错：Invalid signature file digest for Manifest main attributes原因是没有删除jar包中的META-INF/<em>.RSA META-INF/</em>.DSA META-INF/<em>.SF文件及文件夹：<br>可以直接在windows下打开jar文件直接删除<br>可以使用linux命令 删除：zip -d <jar file="" name="">.jar META-INF/</jar></em>.RSA META-INF/<em>.DSA META-INF/</em>.SF</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/10/08/hello-hexo/" itemprop="url">
                   hello hexo
                 </a>
@@ -640,7 +496,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -648,7 +504,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -657,7 +513,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
