@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="spark 大数据," />
 
 
 
@@ -84,15 +84,16 @@
 
 
 
-<meta name="description" content="my world">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一界">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="spark单机版wordcount实例运行过程搭建linux下spark环境java环境下载java7或者更高的版本在linux下解压配置环境变量：JAVA_HOME  和  PATH 两个变量测试是否成功：java -version 是否是和你安装的版本相同scala环境下载2.11.x之后的版本接下来的步骤和安装java的相同最后使用scala -version测试是否安装成功hadoop环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark 单机环境搭建">
+<meta property="og:url" content="http://yoursite.com/2016/10/17/spark-单机环境搭建/index.html">
 <meta property="og:site_name" content="一界">
-<meta property="og:description" content="my world">
+<meta property="og:description" content="spark单机版wordcount实例运行过程搭建linux下spark环境java环境下载java7或者更高的版本在linux下解压配置环境变量：JAVA_HOME  和  PATH 两个变量测试是否成功：java -version 是否是和你安装的版本相同scala环境下载2.11.x之后的版本接下来的步骤和安装java的相同最后使用scala -version测试是否安装成功hadoop环境">
+<meta property="og:updated_time" content="2016-10-17T06:07:53.912Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一界">
-<meta name="twitter:description" content="my world">
+<meta name="twitter:title" content="spark 单机环境搭建">
+<meta name="twitter:description" content="spark单机版wordcount实例运行过程搭建linux下spark环境java环境下载java7或者更高的版本在linux下解压配置环境变量：JAVA_HOME  和  PATH 两个变量测试是否成功：java -version 是否是和你安装的版本相同scala环境下载2.11.x之后的版本接下来的步骤和安装java的相同最后使用scala -version测试是否安装成功hadoop环境">
 
 
 
@@ -113,10 +114,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/17/spark-单机环境搭建/"/>
 
 
-  <title> 一界 </title>
+  <title> spark 单机环境搭建 | 一界 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -137,9 +138,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -236,9 +235,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -258,10 +257,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/10/17/spark-单机环境搭建/" itemprop="url">
-                  spark 单机环境搭建
-                </a>
+                spark 单机环境搭建
               
             
           </h1>
@@ -320,9 +316,7 @@
       
 
       
-        
-          
-            <p>spark单机版wordcount实例运行过程<br>搭建linux下spark环境<br>java环境<br>下载java7或者更高的版本<br>在linux下解压<br>配置环境变量：JAVA_HOME  和  PATH 两个变量<br>测试是否成功：java -version 是否是和你安装的版本相同<br>scala环境<br>下载2.11.x之后的版本<br>接下来的步骤和安装java的相同<br>最后使用scala -version测试是否安装成功<br>hadoop环境<br>此处可参考这篇博文<a href="http://blog.csdn.net/zwx19921215/article/details/41819941" target="_blank" rel="external">http://blog.csdn.net/zwx19921215/article/details/41819941</a><br>spark环境<br>下载spark2.0.1稳定版本<br>在linux下解压，并配置环境变量 SPARK_HOME 和 PATH<br>使用spark_shell命令看能否正常启动，能则安装成功<br>编写程序并打包<br>搭建开发环境：<br>使用idea+maven创建一个简单的java module即可<br>编写程序，这里使用最简单的wordCount例子<br>import org.apache.spark.api.java.JavaPairRDD;<br>import org.apache.spark.api.java.JavaRDD;<br>import org.apache.spark.api.java.function.FlatMapFunction;<br>import org.apache.spark.api.java.function.Function2;<br>import org.apache.spark.api.java.function.PairFunction;<br>import org.apache.spark.sql.SparkSession;<br>import scala.Tuple2;<br>import java.util.Arrays;<br>import java.util.Iterator;<br>import java.util.List;<br>import java.util.regex.Pattern;<br>public final class JavaWordCount {<br>    private static final Pattern SPACE = Pattern.compile(“ “);<br>    public static void main(String[] args) throws Exception {<br>        if (args.length != 2) {<br>            System.err.println(“参数输入有误，一个是输入地址，一个是输出地址”);<br>            System.exit(1);<br>        }<br>        SparkSession spark = SparkSession<br>                .builder()<br>                .appName(“JavaWordCount”)<br>                .getOrCreate();</p>
+        <p>spark单机版wordcount实例运行过程<br>搭建linux下spark环境<br>java环境<br>下载java7或者更高的版本<br>在linux下解压<br>配置环境变量：JAVA_HOME  和  PATH 两个变量<br>测试是否成功：java -version 是否是和你安装的版本相同<br>scala环境<br>下载2.11.x之后的版本<br>接下来的步骤和安装java的相同<br>最后使用scala -version测试是否安装成功<br>hadoop环境<br>此处可参考这篇博文<a href="http://blog.csdn.net/zwx19921215/article/details/41819941" target="_blank" rel="external">http://blog.csdn.net/zwx19921215/article/details/41819941</a><br>spark环境<br>下载spark2.0.1稳定版本<br>在linux下解压，并配置环境变量 SPARK_HOME 和 PATH<br>使用spark_shell命令看能否正常启动，能则安装成功<br>编写程序并打包<br>搭建开发环境：<br>使用idea+maven创建一个简单的java module即可<br>编写程序，这里使用最简单的wordCount例子<br>import org.apache.spark.api.java.JavaPairRDD;<br>import org.apache.spark.api.java.JavaRDD;<br>import org.apache.spark.api.java.function.FlatMapFunction;<br>import org.apache.spark.api.java.function.Function2;<br>import org.apache.spark.api.java.function.PairFunction;<br>import org.apache.spark.sql.SparkSession;<br>import scala.Tuple2;<br>import java.util.Arrays;<br>import java.util.Iterator;<br>import java.util.List;<br>import java.util.regex.Pattern;<br>public final class JavaWordCount {<br>    private static final Pattern SPACE = Pattern.compile(“ “);<br>    public static void main(String[] args) throws Exception {<br>        if (args.length != 2) {<br>            System.err.println(“参数输入有误，一个是输入地址，一个是输出地址”);<br>            System.exit(1);<br>        }<br>        SparkSession spark = SparkSession<br>                .builder()<br>                .appName(“JavaWordCount”)<br>                .getOrCreate();</p>
 <pre><code>    JavaRDD&lt;String&gt; lines = spark.read().textFile(args[0]).javaRDD();
     JavaRDD&lt;String&gt; words = lines.flatMap(new FlatMapFunction&lt;String, String&gt;() {
         @Override
@@ -355,253 +349,59 @@
 <p>打包，如下图：<br>如下<br>找到你要打包的module，并指定那个是主类<br>如果打过包的有可能会包这个错，直接删掉改文件即可，打包完成之后也要删掉这个目录和下面的这个.mf文件，不然运行时会报错。<br>配置打包输出路径<br>选中module，并make<br>在对应的输出路径中找到jar包即可<br>在spark中运行<br>将打包好的jar copy到linux下的某个路径下，可在spark目录下新建一个专门存放应用的文件夹<br>启动spark：<br>切换到spark目录下，使用sbin/start-all.sh命令启动spark，如果无误，则显示如下<br>使用命令跑打包好的程序jar：上面的例子中稍微修改了下自带的程序，所以最后两个参数是必须的，一个是hdfs上的输入路径，一个是输出路径，这些路径可以换成普通的文件路径</p>
 <h1 id="bin-spark-submit-–class-test-JavaWordCount-–master-local-apps-spark-jar-hdfs-192-168-11-133-9000-data-wordCount-wordcount-txt-hdfs-192-168-11-133-9000-output-count"><a href="#bin-spark-submit-–class-test-JavaWordCount-–master-local-apps-spark-jar-hdfs-192-168-11-133-9000-data-wordCount-wordcount-txt-hdfs-192-168-11-133-9000-output-count" class="headerlink" title="bin/spark-submit –class test.JavaWordCount –master local ./apps/spark.jar hdfs://192.168.11.133:9000/data/wordCount/wordcount.txt hdfs://192.168.11.133:9000/output/count/"></a>bin/spark-submit –class test.JavaWordCount –master local ./apps/spark.jar hdfs://192.168.11.133:9000/data/wordCount/wordcount.txt hdfs://192.168.11.133:9000/output/count/</h1><p>命令详解：<br>spark-submit: spark的命令<br>–class ：主类的文件路径，包名+类名<br>–master：主机的地址 + 打包文件的路径，这里使用本机local[2],中括号里的是主机的核数，可选；后面是jar包的存放路径<br>程序的启动参数配置，第一个是输入路径，第二个是输出路径，这个不同的工程有不同的参数设置。<br>参数设置具体可看官网：<a href="http://spark.apache.org/docs/latest/submitting-applications.html" target="_blank" rel="external">http://spark.apache.org/docs/latest/submitting-applications.html</a><br>如果报错：Invalid signature file digest for Manifest main attributes原因是没有删除jar包中的META-INF/<em>.RSA META-INF/</em>.DSA META-INF/<em>.SF文件及文件夹：<br>可以直接在windows下打开jar文件直接删除<br>可以使用linux命令 删除：zip -d <jar file="" name="">.jar META-INF/</jar></em>.RSA META-INF/<em>.DSA META-INF/</em>.SF</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/08/hello-hexo/" itemprop="url">
-                  hello hexo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T19:09:05+08:00" content="2016-10-08">
-              2016-10-08
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/文字/" itemprop="url" rel="index">
-                    <span itemprop="name">文字</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/spark-大数据/" rel="tag">#spark 大数据</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>结束只是暂时的，开始总是不易。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/08/hello-hexo/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/08/hello-hexo/" rel="next" title="hello hexo">
+                <i class="fa fa-chevron-left"></i> hello hexo
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/08/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T18:12:54+08:00" content="2016-10-08">
-              2016-10-08
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -609,6 +409,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -628,8 +432,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -699,6 +512,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bin-spark-submit-–class-test-JavaWordCount-–master-local-apps-spark-jar-hdfs-192-168-11-133-9000-data-wordCount-wordcount-txt-hdfs-192-168-11-133-9000-output-count"><span class="nav-number">1.</span> <span class="nav-text">bin/spark-submit –class test.JavaWordCount –master local ./apps/spark.jar hdfs://192.168.11.133:9000/data/wordCount/wordcount.txt hdfs://192.168.11.133:9000/output/count/</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -802,6 +626,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
