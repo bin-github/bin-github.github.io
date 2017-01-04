@@ -1,0 +1,685 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mybatis," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="##mybatis结果集映射总结
+
+###1.普通对象结果集映射
+
+1.对象的属性都是一些java的八种常用类型或者String类型，直接进行映射即可，如下：
+
+123456&amp;lt;resultMap type=&amp;quot;com.test.entity.Person&amp;quot; id=&amp;quot;person&amp;quot;&amp;gt;		&amp;lt;id property=&amp;quot;id&amp;quot; c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis结果集映射总结">
+<meta property="og:url" content="http://yoursite.com/2017/01/04/mybatis结果集映射小结/index.html">
+<meta property="og:site_name" content="一界">
+<meta property="og:description" content="##mybatis结果集映射总结
+
+###1.普通对象结果集映射
+
+1.对象的属性都是一些java的八种常用类型或者String类型，直接进行映射即可，如下：
+
+123456&amp;lt;resultMap type=&amp;quot;com.test.entity.Person&amp;quot; id=&amp;quot;person&amp;quot;&amp;gt;		&amp;lt;id property=&amp;quot;id&amp;quot; c">
+<meta property="og:updated_time" content="2017-01-04T08:31:19.440Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis结果集映射总结">
+<meta name="twitter:description" content="##mybatis结果集映射总结
+
+###1.普通对象结果集映射
+
+1.对象的属性都是一些java的八种常用类型或者String类型，直接进行映射即可，如下：
+
+123456&amp;lt;resultMap type=&amp;quot;com.test.entity.Person&amp;quot; id=&amp;quot;person&amp;quot;&amp;gt;		&amp;lt;id property=&amp;quot;id&amp;quot; c">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/04/mybatis结果集映射小结/"/>
+
+
+  <title> mybatis结果集映射总结 | 一界 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">一界</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mybatis结果集映射总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-04T16:09:05+08:00" content="2017-01-04">
+              2017-01-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##mybatis结果集映射总结</p>
+<hr>
+<p>###1.普通对象结果集映射</p>
+<blockquote>
+<p>1.对象的属性都是一些java的八种常用类型或者String类型，<br>直接进行映射即可，如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;resultMap type=&quot;com.test.entity.Person&quot; id=&quot;person&quot;&gt;</div><div class="line">		&lt;id property=&quot;id&quot; column=&quot;id&quot; /&gt;</div><div class="line">		&lt;result property=&quot;name&quot; column=&quot;user_name&quot;/&gt;</div><div class="line">		&lt;result property=&quot;sex&quot; column=&quot;user_sex&quot;/&gt;</div><div class="line">                         	┇</div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>2.</p>
+</blockquote>
+<p>###2.对象属性含有另一种对象的结果集映射</p>
+<blockquote>
+<p>1.对象属性中，部分属性是另一种对象，并且是has - one关系（一对一关系），如：一个博客有一个作者。<br>这类情况使用 <strong>association</strong> 映射节点。</p>
+<blockquote>
+<p>1.association 和普通的resultMap配置属性基本相同</p>
+<p>2.具体如下：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;selectBlog&quot; parameterType=&quot;int&quot; resultMap=&quot;blogResult&quot;&gt;</div><div class="line">    select  </div><div class="line">    B.id as blog_id,  </div><div class="line">    B.title as blog_title,  </div><div class="line">    **B.author_id as blog_author_id,**  </div><div class="line">    **A.id as author_id,**  </div><div class="line">    A.username as author_username,  </div><div class="line">    A.password as author_password,  </div><div class="line">    A.email as author_email,  </div><div class="line">    A.bio as author_bio  </div><div class="line">    from Blog B left outer join Author A on B.author_id = A.id  </div><div class="line">    where B.id = #&#123;id&#125;  </div><div class="line">&lt;/select&gt;</div><div class="line">*如上的这类一对一嵌套查询可以使用如下的这类映射：*</div><div class="line">&lt;resultMap id=&quot;blogResult&quot; type=&quot;Blog&quot;&gt;  </div><div class="line">    &lt;id property=”blog_id” column=&quot;id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;  </div><div class="line">    &lt;association property=&quot;author&quot; column=&quot;blog_author_id&quot;     javaType=&quot;Author&quot;  </div><div class="line">    resultMap=”authorResult”/&gt;  </div><div class="line">&lt;/resultMap&gt;  </div><div class="line">       </div><div class="line">&lt;resultMap id=&quot;authorResult&quot; type=&quot;Author&quot;&gt;  </div><div class="line">    &lt;id property=&quot;id&quot; column=&quot;author_id&quot;/&gt;  </div><div class="line">    &lt;result property=&quot;username&quot; column=&quot;author_username&quot;/&gt;  </div><div class="line">    &lt;result property=&quot;password&quot; column=&quot;author_password&quot;/&gt;  </div><div class="line">&lt;/resultMap&gt;</div><div class="line">*或者直接将这两个查映射直接嵌套写：*</div><div class="line">&lt;resultMap id=&quot;blogResult&quot; type=&quot;Blog&quot;&gt;  </div><div class="line">    &lt;id property=”blog_id” column=&quot;id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;  </div><div class="line">    &lt;association property=&quot;author&quot; column=&quot;blog_author_id&quot;     javaType=&quot;Author&quot;&gt;  </div><div class="line">        &lt;id property=&quot;id&quot; column=&quot;author_id&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;username&quot; column=&quot;author_username&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;password&quot; column=&quot;author_password&quot;/&gt;  </div><div class="line">    &lt;/association&gt;  </div><div class="line">&lt;/resultMap&gt;</div><div class="line">    *id元素在嵌套结果映射中扮演了非常重要的角色，你应该总是指定一个或多个属性来唯一标识这个结果集。</div><div class="line">事实上，如果您没有那样做，MyBatis也会工作，但是会导致严重性能开销。选择尽量少的属性来唯一标识结果，</div><div class="line">而使用主键是最明显的选择（即使是复合主键）。*</div></pre></td></tr></table></figure>
+<blockquote>
+<p>2.对象属性中，部分属性是另一种对象，并且是has - many关系（一对多关系），如：一个博客有多篇文章。<br>这类情况使用 <strong>collection</strong> 映射节点，具体如下：</p>
+<blockquote>
+<p>1.collection的属性 ofType ：是集合中元素的类型，一般是普通java对象，其余与association 基本相同</p>
+<p>2.具体实现：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;selectBlog&quot; parameterType=&quot;int&quot; resultMap=&quot;blogResult&quot;&gt;</div><div class="line">    select  </div><div class="line">    B.id as blog_id,  </div><div class="line">    B.title as blog_title,  </div><div class="line">    B.author_id as blog_author_id,  </div><div class="line">    P.id as post_id,  </div><div class="line">    P.subject as post_subject,  </div><div class="line">    P.body as post_body,  </div><div class="line">    from Blog B  </div><div class="line">    left outer join Post P on B.id = P.blog_id  </div><div class="line">where B.id = #&#123;id&#125;  </div><div class="line">&lt;/select&gt; </div><div class="line">*将两个结果集嵌套，当然也可以分开，提高重用性*</div><div class="line">&lt;resultMap id=&quot;blogResult&quot; type=&quot;Blog&quot;&gt;  </div><div class="line">    &lt;id property=”id” column=&quot;blog_id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;  </div><div class="line">    &lt;collection property=&quot;posts&quot; ofType=&quot;Post&quot;&gt;  </div><div class="line">        &lt;id property=&quot;id&quot; column=&quot;post_id&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;subject&quot; column=&quot;post_subject&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;body&quot; column=&quot;post_body&quot;/&gt;  </div><div class="line">    &lt;/collection&gt;  </div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure>
+<p>###3.Discriminator(识别器)结果集筛选：</p>
+<blockquote>
+<p>1.功能类似于java的switch，</p>
+<p>2.case中的resultMap需要extends父resultMap，不然结果集值包含case中resultMap中的属性。</p>
+<p>3.具体实现：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;resultMap id=&quot;vehicleResult&quot; type=&quot;Vehicle&quot;&gt;  </div><div class="line">    &lt;id property=”id” column=&quot;id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;vin&quot; column=&quot;vin&quot;/&gt;  </div><div class="line">    &lt;result property=&quot;color&quot; column=&quot;color&quot;/&gt;  </div><div class="line">    &lt;discriminator javaType=&quot;int&quot; column=&quot;vehicle_type&quot;&gt;  </div><div class="line">        &lt;case value=&quot;1&quot; resultMap=&quot;carResult&quot;/&gt;  </div><div class="line">        &lt;case value=&quot;2&quot; resultMap=&quot;truckResult&quot;/&gt;  </div><div class="line">    &lt;/discriminator&gt;  </div><div class="line">&lt;/resultMap&gt; </div><div class="line"></div><div class="line">&lt;resultMap id=&quot;carResult&quot; type=&quot;Car&quot; **extends=”vehicleResult”**&gt;</div><div class="line">    &lt;result property=”doorCount” column=&quot;door_count&quot; /&gt;</div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure>
+<p>参考：<a href="http://blog.csdn.net/jr_soft/article/details/35274691" target="_blank" rel="external">http://blog.csdn.net/jr_soft/article/details/35274691</a><br><a href="http://www.cnblogs.com/yansum/p/5819973.html" target="_blank" rel="external">http://www.cnblogs.com/yansum/p/5819973.html</a><br><a href="http://www.mybatis.org/mybatis-3/sqlmap-xml.html" target="_blank" rel="external">http://www.mybatis.org/mybatis-3/sqlmap-xml.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mybatis/" rel="tag">#mybatis</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/22/数据库隔离级别简介/" rel="next" title="事务隔离级别介绍">
+                <i class="fa fa-chevron-left"></i> 事务隔离级别介绍
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/04/java变长数据结构扩容小结/" rel="prev" title="java变长数据结构扩容小结">
+                java变长数据结构扩容小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="qiao bin" />
+          <p class="site-author-name" itemprop="name">qiao bin</p>
+          <p class="site-description motion-element" itemprop="description">my world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/bin-github" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://t.cn/RVL34s5" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qiao bin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java 数据结构," />
 
 
 
@@ -84,15 +84,49 @@
 
 
 
-<meta name="description" content="my world">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一界">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="##java变长数据结构扩容小结：
+
+
+线程安全
+
+线程安全就是多线程访问时，采用了加锁机制，当一个线程访问该类的某个数据时，进行保护，其它线程不能进行访问直到该线程读取完，其它线程菜可使用.不会出现数据不一致或者数据污染.
+线程不安全就是不提供数据访问保护，多线程先后更改数据会产生数据不一致或者数据污染的情况.
+一般使用synchronized关键字锁同步
+
+
+
+###1.StringBuffe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java变长数据结构扩容小结">
+<meta property="og:url" content="http://yoursite.com/2017/10/04/java变长数据结构扩容小结/index.html">
 <meta property="og:site_name" content="一界">
-<meta property="og:description" content="my world">
+<meta property="og:description" content="##java变长数据结构扩容小结：
+
+
+线程安全
+
+线程安全就是多线程访问时，采用了加锁机制，当一个线程访问该类的某个数据时，进行保护，其它线程不能进行访问直到该线程读取完，其它线程菜可使用.不会出现数据不一致或者数据污染.
+线程不安全就是不提供数据访问保护，多线程先后更改数据会产生数据不一致或者数据污染的情况.
+一般使用synchronized关键字锁同步
+
+
+
+###1.StringBuffe">
+<meta property="og:updated_time" content="2017-01-04T08:34:01.945Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一界">
-<meta name="twitter:description" content="my world">
+<meta name="twitter:title" content="java变长数据结构扩容小结">
+<meta name="twitter:description" content="##java变长数据结构扩容小结：
+
+
+线程安全
+
+线程安全就是多线程访问时，采用了加锁机制，当一个线程访问该类的某个数据时，进行保护，其它线程不能进行访问直到该线程读取完，其它线程菜可使用.不会出现数据不一致或者数据污染.
+线程不安全就是不提供数据访问保护，多线程先后更改数据会产生数据不一致或者数据污染的情况.
+一般使用synchronized关键字锁同步
+
+
+
+###1.StringBuffe">
 
 
 
@@ -113,10 +147,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/04/java变长数据结构扩容小结/"/>
 
 
-  <title> 一界 </title>
+  <title> java变长数据结构扩容小结 | 一界 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -137,9 +171,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -236,9 +268,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -258,10 +290,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/10/04/java变长数据结构扩容小结/" itemprop="url">
-                  java变长数据结构扩容小结
-                </a>
+                java变长数据结构扩容小结
               
             
           </h1>
@@ -320,9 +349,7 @@
       
 
       
-        
-          
-            <p>##java变长数据结构扩容小结：</p>
+        <p>##java变长数据结构扩容小结：</p>
 <hr>
 <blockquote>
 <p>线程安全</p>
@@ -412,545 +439,59 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">void addEntry(int hash, K key, V value, int bucketIndex) &#123;</div><div class="line">        if ((size &gt;= threshold) &amp;&amp; (null != table[bucketIndex])) &#123;</div><div class="line">            resize(2 * table.length);    // 扩容机制</div><div class="line">            hash = (null != key) ? hash(key) : 0;</div><div class="line">            bucketIndex = indexFor(hash, table.length);</div><div class="line">        &#125;</div><div class="line">        createEntry(hash, key, value, bucketIndex);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/04/mybatis结果集映射小结/" itemprop="url">
-                  mybatis结果集映射总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-04T16:09:05+08:00" content="2017-01-04">
-              2017-01-04
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/java-数据结构/" rel="tag">#java 数据结构</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>##mybatis结果集映射总结</p>
-<hr>
-<p>###1.普通对象结果集映射</p>
-<blockquote>
-<p>1.对象的属性都是一些java的八种常用类型或者String类型，<br>直接进行映射即可，如下：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;resultMap type=&quot;com.test.entity.Person&quot; id=&quot;person&quot;&gt;</div><div class="line">		&lt;id property=&quot;id&quot; column=&quot;id&quot; /&gt;</div><div class="line">		&lt;result property=&quot;name&quot; column=&quot;user_name&quot;/&gt;</div><div class="line">		&lt;result property=&quot;sex&quot; column=&quot;user_sex&quot;/&gt;</div><div class="line">                         	┇</div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>2.</p>
-</blockquote>
-<p>###2.对象属性含有另一种对象的结果集映射</p>
-<blockquote>
-<p>1.对象属性中，部分属性是另一种对象，并且是has - one关系（一对一关系），如：一个博客有一个作者。<br>这类情况使用 <strong>association</strong> 映射节点。</p>
-<blockquote>
-<p>1.association 和普通的resultMap配置属性基本相同</p>
-<p>2.具体如下：</p>
-</blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;selectBlog&quot; parameterType=&quot;int&quot; resultMap=&quot;blogResult&quot;&gt;</div><div class="line">    select  </div><div class="line">    B.id as blog_id,  </div><div class="line">    B.title as blog_title,  </div><div class="line">    **B.author_id as blog_author_id,**  </div><div class="line">    **A.id as author_id,**  </div><div class="line">    A.username as author_username,  </div><div class="line">    A.password as author_password,  </div><div class="line">    A.email as author_email,  </div><div class="line">    A.bio as author_bio  </div><div class="line">    from Blog B left outer join Author A on B.author_id = A.id  </div><div class="line">    where B.id = #&#123;id&#125;  </div><div class="line">&lt;/select&gt;</div><div class="line">*如上的这类一对一嵌套查询可以使用如下的这类映射：*</div><div class="line">&lt;resultMap id=&quot;blogResult&quot; type=&quot;Blog&quot;&gt;  </div><div class="line">    &lt;id property=”blog_id” column=&quot;id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;  </div><div class="line">    &lt;association property=&quot;author&quot; column=&quot;blog_author_id&quot;     javaType=&quot;Author&quot;  </div><div class="line">    resultMap=”authorResult”/&gt;  </div><div class="line">&lt;/resultMap&gt;  </div><div class="line">       </div><div class="line">&lt;resultMap id=&quot;authorResult&quot; type=&quot;Author&quot;&gt;  </div><div class="line">    &lt;id property=&quot;id&quot; column=&quot;author_id&quot;/&gt;  </div><div class="line">    &lt;result property=&quot;username&quot; column=&quot;author_username&quot;/&gt;  </div><div class="line">    &lt;result property=&quot;password&quot; column=&quot;author_password&quot;/&gt;  </div><div class="line">&lt;/resultMap&gt;</div><div class="line">*或者直接将这两个查映射直接嵌套写：*</div><div class="line">&lt;resultMap id=&quot;blogResult&quot; type=&quot;Blog&quot;&gt;  </div><div class="line">    &lt;id property=”blog_id” column=&quot;id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;  </div><div class="line">    &lt;association property=&quot;author&quot; column=&quot;blog_author_id&quot;     javaType=&quot;Author&quot;&gt;  </div><div class="line">        &lt;id property=&quot;id&quot; column=&quot;author_id&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;username&quot; column=&quot;author_username&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;password&quot; column=&quot;author_password&quot;/&gt;  </div><div class="line">    &lt;/association&gt;  </div><div class="line">&lt;/resultMap&gt;</div><div class="line">    *id元素在嵌套结果映射中扮演了非常重要的角色，你应该总是指定一个或多个属性来唯一标识这个结果集。</div><div class="line">事实上，如果您没有那样做，MyBatis也会工作，但是会导致严重性能开销。选择尽量少的属性来唯一标识结果，</div><div class="line">而使用主键是最明显的选择（即使是复合主键）。*</div></pre></td></tr></table></figure>
-<blockquote>
-<p>2.对象属性中，部分属性是另一种对象，并且是has - many关系（一对多关系），如：一个博客有多篇文章。<br>这类情况使用 <strong>collection</strong> 映射节点，具体如下：</p>
-<blockquote>
-<p>1.collection的属性 ofType ：是集合中元素的类型，一般是普通java对象，其余与association 基本相同</p>
-<p>2.具体实现：</p>
-</blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;selectBlog&quot; parameterType=&quot;int&quot; resultMap=&quot;blogResult&quot;&gt;</div><div class="line">    select  </div><div class="line">    B.id as blog_id,  </div><div class="line">    B.title as blog_title,  </div><div class="line">    B.author_id as blog_author_id,  </div><div class="line">    P.id as post_id,  </div><div class="line">    P.subject as post_subject,  </div><div class="line">    P.body as post_body,  </div><div class="line">    from Blog B  </div><div class="line">    left outer join Post P on B.id = P.blog_id  </div><div class="line">where B.id = #&#123;id&#125;  </div><div class="line">&lt;/select&gt; </div><div class="line">*将两个结果集嵌套，当然也可以分开，提高重用性*</div><div class="line">&lt;resultMap id=&quot;blogResult&quot; type=&quot;Blog&quot;&gt;  </div><div class="line">    &lt;id property=”id” column=&quot;blog_id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;  </div><div class="line">    &lt;collection property=&quot;posts&quot; ofType=&quot;Post&quot;&gt;  </div><div class="line">        &lt;id property=&quot;id&quot; column=&quot;post_id&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;subject&quot; column=&quot;post_subject&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;body&quot; column=&quot;post_body&quot;/&gt;  </div><div class="line">    &lt;/collection&gt;  </div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure>
-<p>###3.Discriminator(识别器)结果集筛选：</p>
-<blockquote>
-<p>1.功能类似于java的switch，</p>
-<p>2.case中的resultMap需要extends父resultMap，不然结果集值包含case中resultMap中的属性。</p>
-<p>3.具体实现：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;resultMap id=&quot;vehicleResult&quot; type=&quot;Vehicle&quot;&gt;  </div><div class="line">    &lt;id property=”id” column=&quot;id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;vin&quot; column=&quot;vin&quot;/&gt;  </div><div class="line">    &lt;result property=&quot;color&quot; column=&quot;color&quot;/&gt;  </div><div class="line">    &lt;discriminator javaType=&quot;int&quot; column=&quot;vehicle_type&quot;&gt;  </div><div class="line">        &lt;case value=&quot;1&quot; resultMap=&quot;carResult&quot;/&gt;  </div><div class="line">        &lt;case value=&quot;2&quot; resultMap=&quot;truckResult&quot;/&gt;  </div><div class="line">    &lt;/discriminator&gt;  </div><div class="line">&lt;/resultMap&gt; </div><div class="line"></div><div class="line">&lt;resultMap id=&quot;carResult&quot; type=&quot;Car&quot; **extends=”vehicleResult”**&gt;</div><div class="line">    &lt;result property=”doorCount” column=&quot;door_count&quot; /&gt;</div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure>
-<p>参考：<a href="http://blog.csdn.net/jr_soft/article/details/35274691" target="_blank" rel="external">http://blog.csdn.net/jr_soft/article/details/35274691</a><br><a href="http://www.cnblogs.com/yansum/p/5819973.html" target="_blank" rel="external">http://www.cnblogs.com/yansum/p/5819973.html</a><br><a href="http://www.mybatis.org/mybatis-3/sqlmap-xml.html" target="_blank" rel="external">http://www.mybatis.org/mybatis-3/sqlmap-xml.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/01/04/mybatis结果集映射小结/" rel="next" title="mybatis结果集映射总结">
+                <i class="fa fa-chevron-left"></i> mybatis结果集映射总结
+              </a>
             
-              
-                
-                <a class="post-title-link" href="/2016/12/22/数据库隔离级别简介/" itemprop="url">
-                  事务隔离级别介绍
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-22T12:09:05+08:00" content="2016-12-22">
-              2016-12-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##mysql事务隔离级别介绍：</p>
-<hr>
-<p>###1.读未提交（read uncommitted）：</p>
-<blockquote>
-<p>1.一个事务读取了另一个事务没有提交的数据。</p>
-<p>2.有可能出现脏读</p>
-</blockquote>
-<p>###2.读提交（read committed）：</p>
-<blockquote>
-<p>1.事务A先读取数据，随后事务B修改数据并提交，事务A再次读取数据时，读取的是事务B提交之后的数据，与起初读取的不同。</p>
-<p>2.写事务阻止其他读事务，读事务不会阻止任何事务</p>
-<p>3.有可能出现不可重复读</p>
-<p>4.sqlserver  oracle等数据库的默认隔离级别</p>
-</blockquote>
-<p>###3.重复读（repeattable read）：</p>
-<blockquote>
-<p>1.事务A先读取数据，事务B插入数据，事务A在读取数据时，两次的结果不同，</p>
-<p>2.可重复读阻止其他写事务，但是不会阻止其他读事务，写事务包括：delect，update（只给存在的表加锁），不包括insert（不存在的行没有加锁）</p>
-<p>3.有可能出现幻读</p>
-<p>4.mysql默认隔离级别</p>
-</blockquote>
-<p>###4.串行化（serializable）:</p>
-<blockquote>
-<p>1.读加共享锁，写加排他锁</p>
-<p>2.读可并发，读写，写写事务之间是互斥的</p>
-</blockquote>
-<p>###5.总结：</p>
-<blockquote>
-<p>1.mysql的innodb引擎使用next-key锁可以预防幻读</p>
-<p>2.隔离等级与数据库读的对照表:</p>
-<p>—<img src="https://github.com/bin-github/my-project/tree/master/files/images/数据库隔离级别表.png" alt="image"></p>
-</blockquote>
-<p>参考：<a href="http://tech.meituan.com/innodb-lock.html" target="_blank" rel="external">http://tech.meituan.com/innodb-lock.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/08/hello-hexo/" itemprop="url">
-                  hello hexo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T19:09:05+08:00" content="2016-10-08">
-              2016-10-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/文字/" itemprop="url" rel="index">
-                    <span itemprop="name">文字</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>结束只是暂时的，开始总是不易。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/08/hello-hexo/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/08/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T18:12:54+08:00" content="2016-10-08">
-              2016-10-08
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -958,6 +499,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -977,8 +522,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -1048,6 +602,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -1151,6 +716,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
