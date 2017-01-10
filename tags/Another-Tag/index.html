@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mysql,事务," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,18 +84,15 @@
 
 
 
-<meta name="description" content="mybatis结果集映射总结">
-<meta property="og:type" content="article">
-<meta property="og:title" content="事务隔离级别介绍">
-<meta property="og:url" content="http://yoursite.com/2016/12/22/数据库隔离级别简介/index.html">
+<meta name="description" content="my world">
+<meta property="og:type" content="website">
+<meta property="og:title" content="一界">
+<meta property="og:url" content="http://yoursite.com/tags/Another-Tag/index.html">
 <meta property="og:site_name" content="一界">
-<meta property="og:description" content="mybatis结果集映射总结">
-<meta property="og:image" content="http://yoursite.com/imgs/personImage/dbTransactionLevel.png">
-<meta property="og:updated_time" content="2017-01-04T14:42:01.092Z">
+<meta property="og:description" content="my world">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="事务隔离级别介绍">
-<meta name="twitter:description" content="mybatis结果集映射总结">
-<meta name="twitter:image" content="http://yoursite.com/imgs/personImage/dbTransactionLevel.png">
+<meta name="twitter:title" content="一界">
+<meta name="twitter:description" content="my world">
 
 
 
@@ -116,10 +113,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/22/数据库隔离级别简介/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/Another-Tag/"/>
 
 
-  <title> 事务隔离级别介绍 | 一界 </title>
+  <title> 标签: Another Tag | 一界 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -140,7 +137,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -238,180 +235,46 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                事务隔离级别介绍
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-22T12:09:05+08:00" content="2016-12-22">
-              2016-12-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>mybatis结果集映射总结<br><a id="more"></a></p>
-<p>##mysql事务隔离级别介绍：</p>
-<hr>
-<p>###1.读未提交（read uncommitted）：</p>
-<blockquote>
-<p>1.一个事务读取了另一个事务没有提交的数据。</p>
-<p>2.有可能出现脏读</p>
-</blockquote>
-<p>###2.读提交（read committed）：</p>
-<blockquote>
-<p>1.事务A先读取数据，随后事务B修改数据并提交，事务A再次读取数据时，读取的是事务B提交之后的数据，与起初读取的不同。</p>
-<p>2.写事务阻止其他读事务，读事务不会阻止任何事务</p>
-<p>3.有可能出现不可重复读</p>
-<p>4.sqlserver  oracle等数据库的默认隔离级别</p>
-</blockquote>
-<p>###3.重复读（repeattable read）：</p>
-<blockquote>
-<p>1.事务A先读取数据，事务B插入数据，事务A在读取数据时，两次的结果不同，</p>
-<p>2.可重复读阻止其他写事务，但是不会阻止其他读事务，写事务包括：delect，update（只给存在的表加锁），不包括insert（不存在的行没有加锁）</p>
-<p>3.有可能出现幻读</p>
-<p>4.mysql默认隔离级别</p>
-</blockquote>
-<p>###4.串行化（serializable）:</p>
-<blockquote>
-<p>1.读加共享锁，写加排他锁</p>
-<p>2.读可并发，读写，写写事务之间是互斥的</p>
-</blockquote>
-<p>###5.总结：</p>
-<blockquote>
-<p>1.mysql的innodb引擎使用next-key锁可以预防幻读</p>
-<p>2.隔离等级与数据库读的对照表:</p>
-<p><img src="imgs/personImage/dbTransactionLevel.png" alt="image"></p>
-</blockquote>
-<p>参考：<a href="http://tech.meituan.com/innodb-lock.html" target="_blank" rel="external">http://tech.meituan.com/innodb-lock.html</a></p>
-
-      
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        Another Tag
+        <small>标签</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-
-      
-    </div>
-
-    <div>
-      
+            <a class="post-title-link" href="/2017/01/10/java类加载机制/" itemprop="url">
+              
+                <span itemprop="name">java类加载机制</span>
+              
+            </a>
         
+      </h1>
 
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-01-10T12:09:05+08:00"
+              content="2017-01-10" >
+          01-10
+        </time>
+      </div>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/mysql/" rel="tag">#mysql</a>
-          
-            <a href="/tags/事务/" rel="tag">#事务</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/10/08/hello-hexo/" rel="next" title="hello hexo">
-                <i class="fa fa-chevron-left"></i> hello hexo
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/03/java变长数据结构扩容小结/" rel="prev" title="java变长数据结构扩容小结">
-                java变长数据结构扩容小结 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
+
+  
 
 
           </div>
@@ -419,10 +282,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -442,17 +301,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -522,17 +372,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目录</p>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -636,10 +475,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
-
 
   
 
