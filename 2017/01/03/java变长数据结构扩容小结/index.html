@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/01/03/java变长数据结构扩容小结/index.html">
 <meta property="og:site_name" content="一界">
 <meta property="og:description" content="java变长数据结构扩容小结">
-<meta property="og:updated_time" content="2017-01-04T14:50:00.027Z">
+<meta property="og:updated_time" content="2017-01-10T07:10:08.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java变长数据结构扩容小结">
 <meta name="twitter:description" content="java变长数据结构扩容小结">
@@ -317,8 +317,7 @@
 
       
         <p>java变长数据结构扩容小结<br><a id="more"></a></p>
-<p>##java变长数据结构扩容小结：</p>
-<hr>
+<h2 id="java变长数据结构扩容小结："><a href="#java变长数据结构扩容小结：" class="headerlink" title="java变长数据结构扩容小结："></a>java变长数据结构扩容小结：</h2><hr>
 <blockquote>
 <p>线程安全</p>
 <ul>
@@ -328,8 +327,7 @@
 </ul>
 <hr>
 </blockquote>
-<p>###1.StringBuffer（线程不安全），StringBuilder（安全）：两者的初始化和扩容机制是一样的</p>
-<blockquote>
+<h3 id="1-StringBuffer（线程不安全），StringBuilder（安全）：两者的初始化和扩容机制是一样的"><a href="#1-StringBuffer（线程不安全），StringBuilder（安全）：两者的初始化和扩容机制是一样的" class="headerlink" title="1.StringBuffer（线程不安全），StringBuilder（安全）：两者的初始化和扩容机制是一样的"></a>1.StringBuffer（线程不安全），StringBuilder（安全）：两者的初始化和扩容机制是一样的</h3><blockquote>
 <p>1.初始大小 16。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public StringBuffer() &#123;</div><div class="line">       super(16);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
@@ -337,8 +335,7 @@
 <p>2.扩容策略：len * 2 + 2</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">    * This implements the expansion semantics of ensureCapacity with no</div><div class="line">    * size check or synchronization.</div><div class="line">    */</div><div class="line">   void expandCapacity(int minimumCapacity) &#123;</div><div class="line">       int newCapacity = value.length * 2 + 2;</div><div class="line">       if (newCapacity - minimumCapacity &lt; 0)</div><div class="line">           newCapacity = minimumCapacity;</div><div class="line">       if (newCapacity &lt; 0) &#123;</div><div class="line">           if (minimumCapacity &lt; 0) // overflow</div><div class="line">               throw new OutOfMemoryError();</div><div class="line">           newCapacity = Integer.MAX_VALUE;</div><div class="line">       &#125;</div><div class="line">       value = Arrays.copyOf(value, newCapacity);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>###2.ArrayList：可变数组，底层使用object对象数组实现，线程不安全</p>
-<blockquote>
+<h3 id="2-ArrayList：可变数组，底层使用object对象数组实现，线程不安全"><a href="#2-ArrayList：可变数组，底层使用object对象数组实现，线程不安全" class="headerlink" title="2.ArrayList：可变数组，底层使用object对象数组实现，线程不安全"></a>2.ArrayList：可变数组，底层使用object对象数组实现，线程不安全</h3><blockquote>
 <p>1.初始大小 0，但是只要增加一个元素，容量将会被置为10</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public ArrayList() &#123;</div><div class="line">        super();</div><div class="line">        this.elementData = EMPTY_ELEMENTDATA;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
@@ -346,8 +343,7 @@
 <blockquote>
 <p>2.扩容机制：如上面的grow方法，大小为原来的1.5倍</p>
 </blockquote>
-<p>###3.LinkedList：底层是链表实现，线程不安全</p>
-<blockquote>
+<h3 id="3-LinkedList：底层是链表实现，线程不安全"><a href="#3-LinkedList：底层是链表实现，线程不安全" class="headerlink" title="3.LinkedList：底层是链表实现，线程不安全"></a>3.LinkedList：底层是链表实现，线程不安全</h3><blockquote>
 <p>1.初始大小：0</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public LinkedList() &#123;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
@@ -355,8 +351,7 @@
 <p>2.扩容机制：每次只是增加一个节点</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public boolean add(E e) &#123;</div><div class="line">        linkLast(e);</div><div class="line">        return true;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>###4.ArrayDeque：底层实现是队列，线程不安全</p>
-<blockquote>
+<h3 id="4-ArrayDeque：底层实现是队列，线程不安全"><a href="#4-ArrayDeque：底层实现是队列，线程不安全" class="headerlink" title="4.ArrayDeque：底层实现是队列，线程不安全"></a>4.ArrayDeque：底层实现是队列，线程不安全</h3><blockquote>
 <p>1.初始大小：16</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public ArrayDeque() &#123;</div><div class="line">        elements = (E[]) new Object[16];</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
@@ -364,8 +359,7 @@
 <p>2.扩容机制：len * 2</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">private void doubleCapacity() &#123;</div><div class="line">        assert head == tail; // 断言assert</div><div class="line">        int p = head;</div><div class="line">        int n = elements.length;</div><div class="line">        int r = n - p; // number of elements to the right of p</div><div class="line">        int newCapacity = n &lt;&lt; 1;</div><div class="line">        if (newCapacity &lt; 0)</div><div class="line">            throw new IllegalStateException(&quot;Sorry, deque too big&quot;);</div><div class="line">        Object[] a = new Object[newCapacity];</div><div class="line">        System.arraycopy(elements, p, a, 0, r);</div><div class="line">        System.arraycopy(elements, 0, a, r, p);</div><div class="line">        elements = (E[])a;</div><div class="line">        head = 0;</div><div class="line">        tail = n;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>###5.Vector（线程安全），stack（线程安全）</p>
-<p>&gt;</p>
+<h3 id="5-Vector（线程安全），stack（线程安全）"><a href="#5-Vector（线程安全），stack（线程安全）" class="headerlink" title="5.Vector（线程安全），stack（线程安全）"></a>5.Vector（线程安全），stack（线程安全）</h3><p>&gt;</p>
 <table>
 <thead>
 <tr>
@@ -388,8 +382,7 @@
 </tbody>
 </table>
 <p>###注：以上的数据类型，在底层元素复制的时候全部使用的是system.arraycopy()，Arrays.copyOf底层使用的也是system.arraycopy(),system.arraycopy()是个native方法。</p>
-<p>###6.hashTable（线程安全）</p>
-<blockquote>
+<h3 id="6-hashTable（线程安全）"><a href="#6-hashTable（线程安全）" class="headerlink" title="6.hashTable（线程安全）"></a>6.hashTable（线程安全）</h3><blockquote>
 <p>1.初始大小：11，填充因子0.75</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public Hashtable() &#123;</div><div class="line">       this(11, 0.75f);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
@@ -397,8 +390,7 @@
 <p>2.扩容机制：len * 2 + 1</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">protected void rehash() &#123;</div><div class="line">        int oldCapacity = table.length;</div><div class="line">        Entry&lt;K,V&gt;[] oldMap = table;</div><div class="line">        // overflow-conscious code</div><div class="line">        int newCapacity = (oldCapacity &lt;&lt; 1) + 1;   // 扩容大小</div><div class="line">        if (newCapacity - MAX_ARRAY_SIZE &gt; 0) &#123;</div><div class="line">            if (oldCapacity == MAX_ARRAY_SIZE)</div><div class="line">                // Keep running with MAX_ARRAY_SIZE buckets</div><div class="line">                return;</div><div class="line">            newCapacity = MAX_ARRAY_SIZE;</div><div class="line">        &#125;</div><div class="line">        ……</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>###7.hashMap，线程不安全，LinkedHashMap，底层是新建一个hashmap，hashSet底层也是新建一个hashMap</p>
-<blockquote>
+<h3 id="7-hashMap，线程不安全，LinkedHashMap，底层是新建一个hashmap，hashSet底层也是新建一个hashMap"><a href="#7-hashMap，线程不安全，LinkedHashMap，底层是新建一个hashmap，hashSet底层也是新建一个hashMap" class="headerlink" title="7.hashMap，线程不安全，LinkedHashMap，底层是新建一个hashmap，hashSet底层也是新建一个hashMap"></a>7.hashMap，线程不安全，LinkedHashMap，底层是新建一个hashmap，hashSet底层也是新建一个hashMap</h3><blockquote>
 <p>1.初始化大小，16，填充因子：0.75</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16</div><div class="line">static final float DEFAULT_LOAD_FACTOR = 0.75f;</div><div class="line"></div><div class="line"> /**</div><div class="line">     * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity</div><div class="line">     * (16) and the default load factor (0.75).</div><div class="line">     */</div><div class="line">    public HashMap() &#123;</div><div class="line">        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
@@ -583,7 +575,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java变长数据结构扩容小结："><span class="nav-number">1.</span> <span class="nav-text">java变长数据结构扩容小结：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-StringBuffer（线程不安全），StringBuilder（安全）：两者的初始化和扩容机制是一样的"><span class="nav-number">1.1.</span> <span class="nav-text">1.StringBuffer（线程不安全），StringBuilder（安全）：两者的初始化和扩容机制是一样的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ArrayList：可变数组，底层使用object对象数组实现，线程不安全"><span class="nav-number">1.2.</span> <span class="nav-text">2.ArrayList：可变数组，底层使用object对象数组实现，线程不安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-LinkedList：底层是链表实现，线程不安全"><span class="nav-number">1.3.</span> <span class="nav-text">3.LinkedList：底层是链表实现，线程不安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-ArrayDeque：底层实现是队列，线程不安全"><span class="nav-number">1.4.</span> <span class="nav-text">4.ArrayDeque：底层实现是队列，线程不安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Vector（线程安全），stack（线程安全）"><span class="nav-number">1.5.</span> <span class="nav-text">5.Vector（线程安全），stack（线程安全）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-hashTable（线程安全）"><span class="nav-number">1.6.</span> <span class="nav-text">6.hashTable（线程安全）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-hashMap，线程不安全，LinkedHashMap，底层是新建一个hashmap，hashSet底层也是新建一个hashMap"><span class="nav-number">1.7.</span> <span class="nav-text">7.hashMap，线程不安全，LinkedHashMap，底层是新建一个hashmap，hashSet底层也是新建一个hashMap</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

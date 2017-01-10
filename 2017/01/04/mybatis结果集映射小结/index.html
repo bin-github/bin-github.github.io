@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/01/04/mybatis结果集映射小结/index.html">
 <meta property="og:site_name" content="一界">
 <meta property="og:description" content="mybatis结果集映射总结">
-<meta property="og:updated_time" content="2017-01-04T14:10:10.575Z">
+<meta property="og:updated_time" content="2017-01-10T07:11:04.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis结果集映射总结">
 <meta name="twitter:description" content="mybatis结果集映射总结">
@@ -317,18 +317,15 @@
 
       
         <p>mybatis结果集映射总结<br><a id="more"></a></p>
-<p>##mybatis结果集映射总结</p>
-<hr>
-<p>###1.普通对象结果集映射</p>
-<blockquote>
+<h2 id="mybatis结果集映射总结"><a href="#mybatis结果集映射总结" class="headerlink" title="mybatis结果集映射总结"></a>mybatis结果集映射总结</h2><hr>
+<h3 id="1-普通对象结果集映射"><a href="#1-普通对象结果集映射" class="headerlink" title="1.普通对象结果集映射"></a>1.普通对象结果集映射</h3><blockquote>
 <p>1.对象的属性都是一些java的八种常用类型或者String类型，<br>直接进行映射即可，如下：</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;resultMap type=&quot;com.test.entity.Person&quot; id=&quot;person&quot;&gt;</div><div class="line">		&lt;id property=&quot;id&quot; column=&quot;id&quot; /&gt;</div><div class="line">		&lt;result property=&quot;name&quot; column=&quot;user_name&quot;/&gt;</div><div class="line">		&lt;result property=&quot;sex&quot; column=&quot;user_sex&quot;/&gt;</div><div class="line">                         	┇</div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>2.</p>
 </blockquote>
-<p>###2.对象属性含有另一种对象的结果集映射</p>
-<blockquote>
+<h3 id="2-对象属性含有另一种对象的结果集映射"><a href="#2-对象属性含有另一种对象的结果集映射" class="headerlink" title="2.对象属性含有另一种对象的结果集映射"></a>2.对象属性含有另一种对象的结果集映射</h3><blockquote>
 <p>1.对象属性中，部分属性是另一种对象，并且是has - one关系（一对一关系），如：一个博客有一个作者。<br>这类情况使用 <strong>association</strong> 映射节点。</p>
 <blockquote>
 <p>1.association 和普通的resultMap配置属性基本相同</p>
@@ -344,8 +341,7 @@
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;selectBlog&quot; parameterType=&quot;int&quot; resultMap=&quot;blogResult&quot;&gt;</div><div class="line">    select  </div><div class="line">    B.id as blog_id,  </div><div class="line">    B.title as blog_title,  </div><div class="line">    B.author_id as blog_author_id,  </div><div class="line">    P.id as post_id,  </div><div class="line">    P.subject as post_subject,  </div><div class="line">    P.body as post_body,  </div><div class="line">    from Blog B  </div><div class="line">    left outer join Post P on B.id = P.blog_id  </div><div class="line">where B.id = #&#123;id&#125;  </div><div class="line">&lt;/select&gt; </div><div class="line">*将两个结果集嵌套，当然也可以分开，提高重用性*</div><div class="line">&lt;resultMap id=&quot;blogResult&quot; type=&quot;Blog&quot;&gt;  </div><div class="line">    &lt;id property=”id” column=&quot;blog_id&quot; /&gt;  </div><div class="line">    &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;  </div><div class="line">    &lt;collection property=&quot;posts&quot; ofType=&quot;Post&quot;&gt;  </div><div class="line">        &lt;id property=&quot;id&quot; column=&quot;post_id&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;subject&quot; column=&quot;post_subject&quot;/&gt;  </div><div class="line">        &lt;result property=&quot;body&quot; column=&quot;post_body&quot;/&gt;  </div><div class="line">    &lt;/collection&gt;  </div><div class="line">&lt;/resultMap&gt;</div></pre></td></tr></table></figure>
-<p>###3.Discriminator(识别器)结果集筛选：</p>
-<blockquote>
+<h3 id="3-Discriminator-识别器-结果集筛选："><a href="#3-Discriminator-识别器-结果集筛选：" class="headerlink" title="3.Discriminator(识别器)结果集筛选："></a>3.Discriminator(识别器)结果集筛选：</h3><blockquote>
 <p>1.功能类似于java的switch，</p>
 <p>2.case中的resultMap需要extends父resultMap，不然结果集值包含case中resultMap中的属性。</p>
 <p>3.具体实现：</p>
@@ -527,7 +523,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis结果集映射总结"><span class="nav-number">1.</span> <span class="nav-text">mybatis结果集映射总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-普通对象结果集映射"><span class="nav-number">1.1.</span> <span class="nav-text">1.普通对象结果集映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对象属性含有另一种对象的结果集映射"><span class="nav-number">1.2.</span> <span class="nav-text">2.对象属性含有另一种对象的结果集映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Discriminator-识别器-结果集筛选："><span class="nav-number">1.3.</span> <span class="nav-text">3.Discriminator(识别器)结果集筛选：</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
