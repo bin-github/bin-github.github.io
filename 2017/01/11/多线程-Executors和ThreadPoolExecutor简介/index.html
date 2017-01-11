@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,多线程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="多线程——Executors和ThreadPoolExecutor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程——Executors和ThreadPoolExecutor">
+<meta property="og:url" content="http://yoursite.com/2017/01/11/多线程-Executors和ThreadPoolExecutor简介/index.html">
+<meta property="og:site_name" content="一界">
+<meta property="og:description" content="多线程——Executors和ThreadPoolExecutor">
+<meta property="og:updated_time" content="2017-01-11T08:10:04.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多线程——Executors和ThreadPoolExecutor">
+<meta name="twitter:description" content="多线程——Executors和ThreadPoolExecutor">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/11/多线程-Executors和ThreadPoolExecutor简介/"/>
+
+
+  <title> 多线程——Executors和ThreadPoolExecutor | 一界 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">一界</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                多线程——Executors和ThreadPoolExecutor
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-11T16:09:05+08:00" content="2017-01-11">
+              2017-01-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>多线程——Executors和ThreadPoolExecutor<br><a id="more"></a></p>
+<h2 id="多线程——Executors和ThreadPoolExecutor"><a href="#多线程——Executors和ThreadPoolExecutor" class="headerlink" title="多线程——Executors和ThreadPoolExecutor"></a>多线程——Executors和ThreadPoolExecutor</h2><h3 id="1-Executors简介："><a href="#1-Executors简介：" class="headerlink" title="1.Executors简介："></a>1.Executors简介：</h3><blockquote>
+<p>1.Executors： </p>
+<blockquote>
+<ul>
+<li>java.util.concurrent.Executors，是一个辅助类，并没有实现或继承Executor接口或者其子接口和实现类。</li>
+<li>不可实例化</li>
+<li>在jdk5开始的加入的</li>
+</ul>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* @since 1.5</div><div class="line">*/</div><div class="line">public class Executors &#123;</div><div class="line">    ....</div><div class="line">    </div><div class="line">    /** Cannot instantiate. */</div><div class="line">    private Executors() &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>2.Executors类包含许多静态方法，一般使用其创建线程池</p>
+</blockquote>
+<h3 id="2-线程创建工厂接口-ThreadFactory和线程池创建类ThreadPoolExecutor："><a href="#2-线程创建工厂接口-ThreadFactory和线程池创建类ThreadPoolExecutor：" class="headerlink" title="2.线程创建工厂接口 ThreadFactory和线程池创建类ThreadPoolExecutor："></a>2.线程创建工厂接口 ThreadFactory和线程池创建类ThreadPoolExecutor：</h3><p>在介绍Executors之前，先简单介绍下Executors中创建线程是如何创建的的</p>
+<blockquote>
+<p>1.Executors线程的创建工作是由静态内部类 DefaultThreadFactory来实现的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static class DefaultThreadFactory implements ThreadFactory &#123;</div><div class="line">       .......</div><div class="line">       //实现 ThreadFactory 接口方法</div><div class="line">       public Thread newThread(Runnable r) &#123;</div><div class="line">           ....</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>2.在Executors中创建常见的几种线程池，底层都是ThreadPoolExecutor 类实现的。如下，ThreadPoolExecutor类实例化需要的各个参数，其中ThreadFactory就是创建线程的工厂<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public ThreadPoolExecutor(int corePoolSize,</div><div class="line">                             int maximumPoolSize,</div><div class="line">                             long keepAliveTime,</div><div class="line">                             TimeUnit unit,</div><div class="line">                             BlockingQueue&lt;Runnable&gt; workQueue,</div><div class="line">                             ThreadFactory threadFactory,</div><div class="line">                             RejectedExecutionHandler handler) &#123;</div><div class="line">       if (corePoolSize &lt; 0 ||</div><div class="line">           maximumPoolSize &lt;= 0 ||</div><div class="line">           maximumPoolSize &lt; corePoolSize ||</div><div class="line">           keepAliveTime &lt; 0)</div><div class="line">           throw new IllegalArgumentException();</div><div class="line">       if (workQueue == null || threadFactory == null || handler == null)</div><div class="line">           throw new NullPointerException();</div><div class="line">       this.corePoolSize = corePoolSize;</div><div class="line">       this.maximumPoolSize = maximumPoolSize;</div><div class="line">       this.workQueue = workQueue;</div><div class="line">       this.keepAliveTime = unit.toNanos(keepAliveTime);</div><div class="line">       this.threadFactory = threadFactory;</div><div class="line">       this.handler = handler;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>3.ThreadPoolExecutor对象初始化的参数介绍：</p>
+<blockquote>
+<ul>
+<li>corePoolSize 核心池大小：0</li>
+<li>maximumPoolSize 线程数的最大值：Integer.MAX_VALUE</li>
+<li>keepAliveTime：当线程池线程的数量大于corePoolSize，在超过keepAliveTime时间后，会将空闲线程删除，直到线程池数量不大于corePoolSize</li>
+<li>TimeUnit：keepAliveTime 的时间单位</li>
+<li>BlockingQueue：保持任务队列的Runnable任务（一般使用默认）</li>
+<li>ThreadFactory：线程创建工厂实现（一般使用默认）</li>
+<li>RejectedExecutionHandler：异常处理实现（一般使用默认）</li>
+</ul>
+</blockquote>
+<p>4.ThreadPoolExecutor各参数大小关系：</p>
+<blockquote>
+<p>1、当任务数 TM 小于 corePoolSize CP 和 maximumPoolSize MP 时，任务被马上创建线程去执行，不放入大小为BQ的 BlockingQueue,其他参数忽略。</p>
+<p>2、当 TM &gt; CP ，TM &lt; MP 和 BQ 时，超出CP的任务放入BlockingQueue（不是同步队列）中等待执行。</p>
+<p>3、当 2 中的 BlockingQueue 为同步队列 SynchronousQueue 时，超出 CP 的任务不会被放入队列，而是直接创建线程去执行，完成之后的线程超出keepAliveTime时间将被回收。</p>
+<p>4.当 TM &gt; CP,TM &gt; MP 和 BQ,maximumPoolSize和keepAliveTime参数失效，超出CP 的任务将被放入BlockingQueue中等待执行。</p>
+<p>5.当 4 中的 BlockingQueue 为同步队列 SynchronousQueue 时，只处理MP任务，其他任务不在处理，抛出异常。</p>
+</blockquote>
+<p>5.在Executors中，常见线程池的创建一般有四种，每一种都有两个创建方法，一般是不需要指定ThreadFactory的，如果有必要，++可自己实现ThreadFactory接口，并在创建线程池时指定，并进行线程异常的处理++</p>
+<blockquote>
+<ul>
+<li>需要制定ThreadFactory的，</li>
+<li>不指定，即使用Executors类内部默认实现的ThreadFactory，</li>
+<li>下面是一个自定义线程工厂的示例：</li>
+</ul>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">    * 自定义线程工厂</div><div class="line">    */</div><div class="line">   public class MyThreadFactory implements ThreadFactory&#123;</div><div class="line">       @Override</div><div class="line">       public Thread newThread(Runnable r) &#123;</div><div class="line">           Thread newThread = new Thread(r);</div><div class="line">           // 设置线程名</div><div class="line">           newThread.setName(&quot;重命名线程名字：&quot; + Thread.currentThread().getName());</div><div class="line">           // 使用内部类进行异常处理</div><div class="line">           newThread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() &#123;</div><div class="line">               @Override</div><div class="line">               public void uncaughtException(Thread t, Throwable e) &#123;</div><div class="line">                   System.out.println(&quot;解决异常！！！&quot; + t.getName() + e.getMessage());</div><div class="line">               &#125;</div><div class="line">           &#125;);</div><div class="line">           return newThread;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h3 id="3-Executors常见创建线程池方法简介："><a href="#3-Executors常见创建线程池方法简介：" class="headerlink" title="3.Executors常见创建线程池方法简介："></a>3.Executors常见创建线程池方法简介：</h3><p>由第二点描述的情况来看，Executors创建四类线程池只是参数的调整而已，下面是四类常用线程池的创建方法</p>
+<blockquote>
+<p>1.创建线程数不限的线程池：newCachedThreadPool();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public static ExecutorService newCachedThreadPool() &#123;</div><div class="line">        return new ThreadPoolExecutor(0, Integer.MAX_VALUE,</div><div class="line">                                      60L, TimeUnit.SECONDS,</div><div class="line">                                      new SynchronousQueue&lt;Runnable&gt;());</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>2.创建线程数固定的线程池：newFixedThreadPool(int nThreads);</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public static ExecutorService newFixedThreadPool(int nThreads) &#123;</div><div class="line">       return new ThreadPoolExecutor(nThreads, nThreads,</div><div class="line">                                     0L, TimeUnit.MILLISECONDS,</div><div class="line">                                     new LinkedBlockingQueue&lt;Runnable&gt;());</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>3.创建单例线程池：newSingleThreadExecutor();</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public static ExecutorService newSingleThreadExecutor() &#123;</div><div class="line">        return new FinalizableDelegatedExecutorService</div><div class="line">            (new ThreadPoolExecutor(1, 1,</div><div class="line">                                    0L, TimeUnit.MILLISECONDS,</div><div class="line">                                    new LinkedBlockingQueue&lt;Runnable&gt;()));</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>4.创建定时执行的线程池：newScheduledThreadPool(int corePoolSize);</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) &#123;</div><div class="line">        return new ScheduledThreadPoolExecutor(corePoolSize);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">// ScheduledThreadPoolExecutor 继承 ThreadPoolExecutor</div><div class="line">public ScheduledThreadPoolExecutor(int corePoolSize) &#123;</div><div class="line">        super(corePoolSize, Integer.MAX_VALUE, 0, TimeUnit.NANOSECONDS,</div><div class="line">              new DelayedWorkQueue());</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="4-ThreadPoolExecutor常用方法简介："><a href="#4-ThreadPoolExecutor常用方法简介：" class="headerlink" title="4.ThreadPoolExecutor常用方法简介："></a>4.ThreadPoolExecutor常用方法简介：</h3><blockquote>
+<p>1.shutdown()和shutdownNow()方法：</p>
+<blockquote>
+<p>1、shutdown方法：执行之后所有线程的状态变成 SHUTDOWN,未执行完任务的线程会继续完成任务，新的任务不会被执行,也不会添加新的任务，不会阻塞，主线程马上结束，当所有任务完成之后线程池销毁</p>
+<p>2、shutdownNow方法：执行之后所有线程变成stop状态，会尽可能去中断所有线程，但不一定成功，最好是进行中断检查（if(Thread.currentThread().isInterrupted() == true) 或者人为抛出异常）</p>
+</blockquote>
+<p>2.ThreadPoolExecutor构造方法：</p>
+<blockquote>
+<blockquote>
+<p>1、ThreadPoolExecutor方法的BlockingQueue一般有三种队列，ArrayBlockingQueue、LinkedBlockingQueue、SynchronousQueue。</p>
+<ul>
+<li>前两种队列可以设置大小，SynchronousQueue不可以</li>
+<li>设置大小后，如果任务数量超过maximumPoolSize和队列大小之和，超出的任务会被拒绝，报异常。</li>
+</ul>
+<p>2、ThreadPoolExecutor的拒绝策略：</p>
+<ul>
+<li>AbortPolicy：当任务添加被拒绝时，抛出异常RejectedExecutionException。</li>
+<li>CallerRunsPolicy：拒绝时，会调用线程池的Thread线程对象去处理拒绝任务<br>-DiscardOldestPolicy：拒绝时，替换等待队列中等待时间最久的任务。<br>-DiscardPolicy：拒绝时，直接丢弃拒绝任务</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>3.remove()方法：删除尚未被执行的任务，只能删除execute提交的任务，submit提交的即时是尚未被执行也是不能删除的。</p>
+<p>4.afterExecute()和beforeExecute()：在线程池创建类里面重写这两个方法，可以做一些监控之类的的功能，类似于aop。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/多线程/" rel="tag">#多线程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/java类加载机制/" rel="next" title="java类加载机制">
+                <i class="fa fa-chevron-left"></i> java类加载机制
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="qiao bin" />
+          <p class="site-author-name" itemprop="name">qiao bin</p>
+          <p class="site-description motion-element" itemprop="description">my world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/bin-github" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://t.cn/RVL34s5" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程——Executors和ThreadPoolExecutor"><span class="nav-number">1.</span> <span class="nav-text">多线程——Executors和ThreadPoolExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Executors简介："><span class="nav-number">1.1.</span> <span class="nav-text">1.Executors简介：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-线程创建工厂接口-ThreadFactory和线程池创建类ThreadPoolExecutor："><span class="nav-number">1.2.</span> <span class="nav-text">2.线程创建工厂接口 ThreadFactory和线程池创建类ThreadPoolExecutor：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Executors常见创建线程池方法简介："><span class="nav-number">1.3.</span> <span class="nav-text">3.Executors常见创建线程池方法简介：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-ThreadPoolExecutor常用方法简介："><span class="nav-number">1.4.</span> <span class="nav-text">4.ThreadPoolExecutor常用方法简介：</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qiao bin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
