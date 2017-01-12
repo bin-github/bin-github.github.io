@@ -1,0 +1,726 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,多线程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1.Future简介：
+1.Future：一个接口，其实现类接受Callable实现类中call方法的返回结果。
+2.Future的不足：
+
+
+get方法是阻塞的，当所有的提交的线程是结果都完成时才会获得结果
+get方法的这种机制，使得任务的完成时有顺序，但是获得结果是确实没法按照完成的顺序来获得的。导致所有结果一起处理，效率低下。
+public V get(long timeout, TimeU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Future、Callable简介">
+<meta property="og:url" content="http://yoursite.com/2017/01/12/多线程-Future和Callable接口/index.html">
+<meta property="og:site_name" content="一界">
+<meta property="og:description" content="1.Future简介：
+1.Future：一个接口，其实现类接受Callable实现类中call方法的返回结果。
+2.Future的不足：
+
+
+get方法是阻塞的，当所有的提交的线程是结果都完成时才会获得结果
+get方法的这种机制，使得任务的完成时有顺序，但是获得结果是确实没法按照完成的顺序来获得的。导致所有结果一起处理，效率低下。
+public V get(long timeout, TimeU">
+<meta property="og:updated_time" content="2017-01-12T15:23:47.957Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Future、Callable简介">
+<meta name="twitter:description" content="1.Future简介：
+1.Future：一个接口，其实现类接受Callable实现类中call方法的返回结果。
+2.Future的不足：
+
+
+get方法是阻塞的，当所有的提交的线程是结果都完成时才会获得结果
+get方法的这种机制，使得任务的完成时有顺序，但是获得结果是确实没法按照完成的顺序来获得的。导致所有结果一起处理，效率低下。
+public V get(long timeout, TimeU">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/12/多线程-Future和Callable接口/"/>
+
+
+  <title> Future、Callable简介 | 一界 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">一界</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Future、Callable简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-12T18:19:05+08:00" content="2017-01-12">
+              2017-01-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-Future简介："><a href="#1-Future简介：" class="headerlink" title="1.Future简介："></a>1.Future简介：</h3><blockquote>
+<p>1.Future：一个接口，其实现类接受Callable实现类中call方法的返回结果。</p>
+<p>2.Future的不足：</p>
+<blockquote>
+<ul>
+<li>get方法是阻塞的，当所有的提交的线程是结果都完成时才会获得结果</li>
+<li>get方法的这种机制，使得任务的完成时有顺序，但是获得结果是确实没法按照完成的顺序来获得的。导致所有结果一起处理，效率低下。</li>
+<li>public V get(long timeout, TimeUnit unit)方法：在规定的最大时间内获取值，如果超时则报异常</li>
+</ul>
+</blockquote>
+</blockquote>
+<h3 id="2-Callable接口简介："><a href="#2-Callable接口简介：" class="headerlink" title="2.Callable接口简介："></a>2.Callable接口简介：</h3><blockquote>
+<p>1.Callable和Runable接口类似：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public interface Callable&lt;V&gt; &#123;</div><div class="line">    /**</div><div class="line">     * Computes a result, or throws an exception if unable to do so.</div><div class="line">     *</div><div class="line">     * @return computed result</div><div class="line">     * @throws Exception if unable to compute a result</div><div class="line">     */</div><div class="line">    V call() throws Exception;</div><div class="line">&#125;</div><div class="line">public interface Runnable &#123;</div><div class="line">    .....</div><div class="line">    public abstract void run();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>2.call方法和run方法相比:</p>
+<blockquote>
+<ul>
+<li>call方法有返回值，并且有异常抛出，在外层可捕获异常</li>
+<li>run方法没有返回值，有异常时无法捕获，但可以在线程池中处理异常</li>
+</ul>
+</blockquote>
+</blockquote>
+<h3 id="3-方法小结："><a href="#3-方法小结：" class="headerlink" title="3.方法小结："></a>3.方法小结：</h3><blockquote>
+<p>1.execute（ThreadPoolExecutor类）和submit（ExecutorService接口）方法：</p>
+<blockquote>
+<ul>
+<li>两者的区别如下：</li>
+</ul>
+</blockquote>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>不同点</th>
+<th>execute</th>
+<th>submit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>返回值</td>
+<td>无</td>
+<td>call方法的返回值</td>
+</tr>
+<tr>
+<td>异常处理</td>
+<td>直接抛出，或者在ThreadFactory中自定义处理</td>
+<td>可以正常的用try{}catch(){}去处理</td>
+</tr>
+<tr>
+<td>可提交的线程类型</td>
+<td>runable类型</td>
+<td>runable和callable类型</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<blockquote>
+<ul>
+<li>submit提交runable任务的时候，最终将runable任务适配成FutureTask，由execute方法去执行，只是返回值结果为空。</li>
+<li>submit的任务是不管是runable还是callable的，最后交由execute方法去执行。</li>
+</ul>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// 1 AbstractExecutorService类</div><div class="line">public Future&lt;?&gt; submit(Runnable task) &#123;</div><div class="line">        if (task == null) throw new NullPointerException();</div><div class="line">        RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, null);</div><div class="line">        execute(ftask);</div><div class="line">        return ftask;</div><div class="line">    &#125;</div><div class="line">// 2 新建一个FutureTask去包装runable   </div><div class="line">protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Runnable runnable, T value) &#123;</div><div class="line">        return new FutureTask&lt;T&gt;(runnable, value);</div><div class="line">    &#125;</div><div class="line">// 3 FutureTask类</div><div class="line">public FutureTask(Runnable runnable, V result) &#123;</div><div class="line">        this.callable = Executors.callable(runnable, result);</div><div class="line">        this.state = NEW;       // ensure visibility of callable</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">// 4 最后由ThreadPoolExecutor类的execute方法去执行</div><div class="line">public void execute(Runnable command) &#123;&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-简单示例："><a href="#4-简单示例：" class="headerlink" title="4.简单示例："></a>4.简单示例：</h3><blockquote>
+<p>1.submit实现了callable的任务;</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">private static void futureTest() &#123;</div><div class="line">        ExecutorService executors = Executors.newCachedThreadPool();</div><div class="line">        Future future = executors.submit(new Callable() &#123;</div><div class="line">            // 此处可抛出异常，在外层捕获处理</div><div class="line">            @Override</div><div class="line">            public Object call() throws Exception &#123;</div><div class="line">                System.out.println(&quot;我被调用了！！&quot;);</div><div class="line">                // 返回值</div><div class="line">                return &quot;我是call方法的返回值&quot;;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        try &#123;</div><div class="line">            String result = (String)future.get();</div><div class="line">            System.out.print(result);</div><div class="line">        &#125; catch (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; catch (ExecutionException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>2.submit实现了Rrunable的任务;</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">private static void futureTest() &#123;</div><div class="line">        ExecutorService executors = Executors.newCachedThreadPool();</div><div class="line">        Future future = executors.submit(new Runnable() &#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                System.out.println(&quot;我被调用了！！&quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        try &#123;</div><div class="line">            int result = (int)future.get();</div><div class="line">            System.out.print(result);</div><div class="line">        &#125; catch (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; catch (ExecutionException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/多线程/" rel="tag">#多线程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/11/多线程-Executors和ThreadPoolExecutor简介/" rel="next" title="多线程——Executors和ThreadPoolExecutor">
+                <i class="fa fa-chevron-left"></i> 多线程——Executors和ThreadPoolExecutor
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="qiao bin" />
+          <p class="site-author-name" itemprop="name">qiao bin</p>
+          <p class="site-description motion-element" itemprop="description">my world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/bin-github" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://t.cn/RVL34s5" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Future简介："><span class="nav-number">1.</span> <span class="nav-text">1.Future简介：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Callable接口简介："><span class="nav-number">2.</span> <span class="nav-text">2.Callable接口简介：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-方法小结："><span class="nav-number">3.</span> <span class="nav-text">3.方法小结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-简单示例："><span class="nav-number">4.</span> <span class="nav-text">4.简单示例：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qiao bin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
