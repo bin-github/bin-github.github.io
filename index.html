@@ -259,6 +259,121 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/12/多线程-CompletionService/" itemprop="url">
+                  多线程——CompletionService接口及实现类简介
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-12T19:05:05+08:00" content="2017-01-12">
+              2017-01-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>多线程——CompletionService接口及实现类简介<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/12/多线程-CompletionService/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/12/多线程-Future和Callable接口/" itemprop="url">
                   Future、Callable简介
                 </a>
@@ -321,84 +436,12 @@
 
       
         
-          
-            <h3 id="1-Future简介："><a href="#1-Future简介：" class="headerlink" title="1.Future简介："></a>1.Future简介：</h3><blockquote>
-<p>1.Future：一个接口，其实现类接受Callable实现类中call方法的返回结果。</p>
-<p>2.Future的不足：</p>
-<blockquote>
-<ul>
-<li>get方法是阻塞的，当所有的提交的线程是结果都完成时才会获得结果</li>
-<li>get方法的这种机制，使得任务的完成时有顺序，但是获得结果是确实没法按照完成的顺序来获得的。导致所有结果一起处理，效率低下。</li>
-<li>public V get(long timeout, TimeUnit unit)方法：在规定的最大时间内获取值，如果超时则报异常</li>
-</ul>
-</blockquote>
-</blockquote>
-<h3 id="2-Callable接口简介："><a href="#2-Callable接口简介：" class="headerlink" title="2.Callable接口简介："></a>2.Callable接口简介：</h3><blockquote>
-<p>1.Callable和Runable接口类似：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public interface Callable&lt;V&gt; &#123;</div><div class="line">    /**</div><div class="line">     * Computes a result, or throws an exception if unable to do so.</div><div class="line">     *</div><div class="line">     * @return computed result</div><div class="line">     * @throws Exception if unable to compute a result</div><div class="line">     */</div><div class="line">    V call() throws Exception;</div><div class="line">&#125;</div><div class="line">public interface Runnable &#123;</div><div class="line">    .....</div><div class="line">    public abstract void run();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>2.call方法和run方法相比:</p>
-<blockquote>
-<ul>
-<li>call方法有返回值，并且有异常抛出，在外层可捕获异常</li>
-<li>run方法没有返回值，有异常时无法捕获，但可以在线程池中处理异常</li>
-</ul>
-</blockquote>
-</blockquote>
-<h3 id="3-方法小结："><a href="#3-方法小结：" class="headerlink" title="3.方法小结："></a>3.方法小结：</h3><blockquote>
-<p>1.execute（ThreadPoolExecutor类）和submit（ExecutorService接口）方法：</p>
-<blockquote>
-<ul>
-<li>两者的区别如下：</li>
-</ul>
-</blockquote>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>不同点</th>
-<th>execute</th>
-<th>submit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>返回值</td>
-<td>无</td>
-<td>call方法的返回值</td>
-</tr>
-<tr>
-<td>异常处理</td>
-<td>直接抛出，或者在ThreadFactory中自定义处理</td>
-<td>可以正常的用try{}catch(){}去处理</td>
-</tr>
-<tr>
-<td>可提交的线程类型</td>
-<td>runable类型</td>
-<td>runable和callable类型</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<blockquote>
-<ul>
-<li>submit提交runable任务的时候，最终将runable任务适配成FutureTask，由execute方法去执行，只是返回值结果为空。</li>
-<li>submit的任务是不管是runable还是callable的，最后交由execute方法去执行。</li>
-</ul>
-</blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// 1 AbstractExecutorService类</div><div class="line">public Future&lt;?&gt; submit(Runnable task) &#123;</div><div class="line">        if (task == null) throw new NullPointerException();</div><div class="line">        RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, null);</div><div class="line">        execute(ftask);</div><div class="line">        return ftask;</div><div class="line">    &#125;</div><div class="line">// 2 新建一个FutureTask去包装runable   </div><div class="line">protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Runnable runnable, T value) &#123;</div><div class="line">        return new FutureTask&lt;T&gt;(runnable, value);</div><div class="line">    &#125;</div><div class="line">// 3 FutureTask类</div><div class="line">public FutureTask(Runnable runnable, V result) &#123;</div><div class="line">        this.callable = Executors.callable(runnable, result);</div><div class="line">        this.state = NEW;       // ensure visibility of callable</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">// 4 最后由ThreadPoolExecutor类的execute方法去执行</div><div class="line">public void execute(Runnable command) &#123;&#125;</div></pre></td></tr></table></figure>
-<h3 id="4-简单示例："><a href="#4-简单示例：" class="headerlink" title="4.简单示例："></a>4.简单示例：</h3><blockquote>
-<p>1.submit提交实现了callable的任务;</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">private static void futureTest() &#123;</div><div class="line">        ExecutorService executors = Executors.newCachedThreadPool();</div><div class="line">        Future future = executors.submit(new Callable() &#123;</div><div class="line">            // 此处可抛出异常，在外层捕获处理</div><div class="line">            @Override</div><div class="line">            public Object call() throws Exception &#123;</div><div class="line">                System.out.println(&quot;我被调用了！！&quot;);</div><div class="line">                // 返回值</div><div class="line">                return &quot;我是call方法的返回值&quot;;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">		// 这里捕获call方法里面的异常</div><div class="line">        try &#123;</div><div class="line">            String result = (String)future.get();</div><div class="line">            System.out.print(result);</div><div class="line">        &#125; catch (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; catch (ExecutionException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>2.submit提交实现了Rrunable的任务;</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">private static void futureTest() &#123;</div><div class="line">        ExecutorService executors = Executors.newCachedThreadPool();</div><div class="line">        Future future = executors.submit(new Runnable() &#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                System.out.println(&quot;我被调用了！！&quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        // 这里无法捕获run方法里面的异常。</div><div class="line">		// 要想处理异常，需要在线程池创建时指定自定义的ThreadFactory类</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-
-          
+          <p>多线程——Future、Callable简介<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/12/多线程-Future和Callable接口/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1252,7 +1295,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
